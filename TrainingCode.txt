@@ -1,0 +1,315 @@
+//First we create the patient class
+
+class patient
+{
+	private String RegistrationNum;
+	private String Patient_Name;
+	private String DOB;
+	private String Gender;
+	private String BloodGroup;
+	private String address;
+	private String PhoneNumber;
+	
+	
+
+	public patient(	String RegistrationNum,String Patient_Name,String DOB,String Gender,String BloodGroup,String address,String PhoneNumber)
+{
+	this.RegistrationNum=RegistrationNum;
+	this.Patient_Name=Patient_Name;
+	this.DOB=DOB;
+	this.Gender=Gender;
+	this.BloodGroup=BloodGroup;
+	this.address=address;
+	this.PhoneNumber=PhoneNumber;
+
+}
+
+	public String getRegistrationNum()
+	{
+		return RegistrationNum;
+	}
+		
+	public void setRegistrationNum(String RegistrationNum)
+	{
+		this.RegistrationNum=RegistrationNum;
+	}
+
+
+
+
+	public String getPatient_Name()
+	{
+		return Patient_Name;
+	}
+		
+	public void setPatient_Name(String Patient_Name)
+	{
+		this.Patient_Name=Patient_Name;
+	}
+
+
+
+	public String getDOB()
+	{
+		return DOB;
+	}
+		
+	public void setDOB(String DOB)
+	{
+		this.DOB=DOB;
+	}
+
+
+
+	public String getGender()
+	{
+		return Gender;
+	}
+		
+	public void setGender(String Gender)
+	{
+		this.Gender=Gender;
+	}
+
+
+
+
+	public String getBloodGroup()
+	{
+		return BloodGroup;
+	}
+		
+	public void setBloodGroup(String BloodGroup)
+	{
+		this.BloodGroup=BloodGroup;
+	}
+
+
+
+
+	public String getaddress()
+	{
+		return address;
+	}
+		
+	public void setaddress(String address)
+	{
+		this.address=address;
+	}
+
+
+
+
+
+	public String getPhoneNumber()
+	{
+		return PhoneNumber;
+	}
+		
+	public void setPhoneNumber(String PhoneNumber)
+	{
+		this.PhoneNumber=PhoneNumber;
+	}
+}
+
+
+
+public class manmer {
+    public static void main(String[] args) {
+
+        //Create a collection to store Patient information
+
+
+        ArrayList<patient> array=new ArrayList<patient>();
+        while(true) {
+	    	System.out.println("Add new patient");
+		System.out.println("List all patient");
+		System.out.println("Search patient");
+		System.out.println("Edit Patient");
+		System.out.println("Delete Patient");
+            Scanner sc = new Scanner(System.in);
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    add(array);
+                    break;
+                case 2:
+                    Display(array);
+                    break;
+                case 3:
+                    delete(array);
+                    break;
+                case 4:
+                    modify(array);
+                    break;
+                case 5:
+                    System.out.println("You have safely exited");
+                    System.exit(0);//drop out
+            }
+        }
+    }
+    //Define a method to add patient
+    public static void add(ArrayList<patient> array){
+        //Keyboard input patients various information and tips
+        Scanner sc=new Scanner(System.in);
+        String id;
+        while(true){
+            System.out.println("Please enter Registration Number of patient");
+            id=sc.nextLine();
+            boolean flag=chongfu(array,id);
+            if(flag==true){
+                System.out.println("Please confirm again, the Registration Number you entered is the same.");
+            }else{
+                break;
+            }
+        }
+        System.out.println("Please enter the Patient name");
+        String Patient_Name=sc.nextLine();
+        System.out.println("Please enter the DOB");
+        String DOB=sc.nextLine();
+        System.out.println("Please enter the Gender");
+        String Gender=sc.nextLine();
+	System.out.println("Please enter the BloodGroup");
+        String BloodGroup=sc.nextLine();
+        System.out.println("Please enter the address");
+        String address=sc.nextLine();
+        System.out.println("Please enter the Phone_Number");
+        String Phone_Number=sc.nextLine();
+        //Create a patient object and assign the entered data to member variables
+        patient s=new patient();
+        s.setRegistrationNum(RegistrationNum);
+        s.setPatient_Name(Patient_Name);
+        s.setDOB(DOB);
+        s.setGender(Gender);
+	s.setBloodGroup(BloodGroup);
+	s.setaddress(address);
+	s.setPhone_Number(Phone_Number);
+
+        //Add patient objects to the collection one by one
+        array.add(s);
+   
+        System.out.println("Add Patient information successfully");
+    }
+
+
+
+
+    //Define a method to view Patient
+    public static void Display(ArrayList<patient> array){
+        if(array.size()==0){
+            System.out.println("There are no patients in the patient library, please add!");
+        }else{
+            //Display information
+            System.out.println("patient:");
+            //Add something to the entered information
+            for(int i=0;i<array.size();i++){
+                patient s=array.get(i);
+                System.out.println(s.getRegistrationNum()+"       "+s.getPatient_Name()+"       "+s.getDOB()+"        "+s.getGender()+"    "+s.getBloodGroup()+"	"+s.getaddress+"	"+s.getPhoneNumber);
+            }
+        }
+    }
+
+
+
+
+    //Define a method to delete patients
+    public static void delete(ArrayList<patient> array){
+        //Display information
+        System.out.println("Please enter the patient Registration Number you want to delete:");
+       
+        Scanner sc=new Scanner(System.in);
+        String deid=sc.nextLine();
+
+        //Traverse the array to find and delete
+
+        for(int i=0;i<array.size();i++){
+            patient s=array.get(i);
+            if(s.getId().equals(deid)){
+                array.remove(i);
+                System.out.println("You have successfully deleted");
+                break;
+            }
+            else{
+                System.out.println("There is no such patient in the system, please confirm!");
+            }
+        }
+    }
+
+
+
+
+    //Define a method to modify patients
+    public static void modify(ArrayList<patient> array){
+        //Prompt information
+        System.out.println("Please enter the patient Registration Number you want to modify");
+       
+        Scanner sc=new Scanner(System.in);
+        String xid=sc.nextLine();
+        //Prompt for new information
+        System.out.println("Please enter a new patient Patient_Name");
+        String xPatient_Name=sc.nextLine();
+        System.out.println("Please enter a new patient DOB");
+        String xDOB=sc.nextLine();
+        System.out.println("Please enter the new patient Gender");
+        String xGender=sc.nextLine();
+        System.out.println("Please enter the new patient BloodGroup");
+        String xBloodGroup=sc.nextLine();
+        System.out.println("Please enter the new patient address");
+        String xaddress=sc.nextLine();
+        System.out.println("Please enter the new patient Phone_Number");
+        String xPhone_Number=sc.nextLine();
+        //Update to the collection
+        patient s=new patient();
+        s.setPatient_Name(xPatient_Name);
+        s.setDOB(xDOB);
+        s.setGender(xGender);
+        s.setBloodGroup(xBloodGroup);
+	s.setaddress(xaddress);
+	s.setPhone_Number(xPhone_Number)
+	
+
+        for(int i=0;i<array.size();i++){
+            patient st=array.get(i);
+            if(st.getId().equals(xid)){
+                array.set(i,s);//i is the index, s is the new patient object
+                System.out.println("Modify patient information successfully");
+                break;
+            }
+            else{
+                System.out.println("There is no such patient in the system, please confirm!");
+            }
+        }
+    }
+
+
+
+
+
+    //Define a method to judge the repeated patient ID, and ensure that there is only one patient ID.
+    public static boolean chongfu(ArrayList<patient> array,String id){
+        boolean flag=false;
+        for(int i=0;i<array.size();i++){
+            patient s=array.get(i);
+            if(s.getId().equals(id)){
+                flag=true;
+                break;
+            }
+        }
+        return flag;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
